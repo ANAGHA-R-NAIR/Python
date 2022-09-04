@@ -1,0 +1,7 @@
+for x in range(200):
+  if x>1: # since all prime numbers are greater than 1
+    for i in range(2,x): # checking whether the number has any factors less than said number
+      if x%i==0: # if there are any factors, reminder will be zero, then break and check for next number
+        break
+    else:
+      print(x)

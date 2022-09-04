@@ -1,0 +1,34 @@
+import random # importing random so as to choose a random number for the guessing game
+
+def playA(): # defining the recursive function to choose whether to play again or not
+  playAgain = input("Do you want to play again?(y/n): ") #storing the user input in the variable playAgain
+  if playAgain != "y" and playAgain != "n":# if the entered input does not match y/n, then the same function gets repeated
+    return playA()
+  else:
+    return playAgain
+
+def Guessgame(): # the main function of the guessing game
+  playAgain = 'y' #for the initial condition, the playAgain variable is assigned the value y so as to begin the game
+  score = 0 # entering initial value of score as 0
+  while playAgain == "y": # using while loop in case of the answer y and else returns the final score
+     score = 0 # entering initial value of score as 0
+     ComputerNum = random.randint(1,50) # the number to be guessed
+     UserNum = int(input("Enter a number between 1 and 50: ")) # the user guessed answer
+     diff = ComputerNum - UserNum # calcukating the difference for the scoring criteria
+     if diff ==0: # if the guessed answer is right, the user is awarded 50 points
+       score =score+50
+       print(f"The number you have entered is the correct number. Your updated score is {score}.")
+     elif diff <=5 and diff>=-5: # if the guessed answer is within the range of 5, the user is awarded 25 points
+       score = score+25
+       print(f"The number you entered is within the range of +/- 5 of the correct number {ComputerNum}. Your updated score is {score}.")
+     elif diff <=10 and diff>=-10: # if the guessed answer is within the range of 10, the user is awarded 10 points
+       score =score+10
+       print(f"The number you entered is within the range of 10 of the correct number {ComputerNum}. Your updated score is {score}.")
+     else: # if the guessed is not even within the range of 10, then the user receives no points
+         print(f"The number you have entered is {UserNum} while the correct number is {ComputerNum}.")
+     playAgain = playA() # assigning the value of playAgain using the function playA()
+  else:
+    print(f"Final score : {score}")
+ 
+
+Guessgame() # starting the game by calling the function Guessgame()

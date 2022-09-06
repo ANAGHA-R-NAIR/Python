@@ -1,0 +1,57 @@
+import random # importing library required to choose between rock, paper and scissors
+
+def playA(): # defining the recursive function to choose whether to play again or not
+  playAgain = input("Do you want to play again?(y/n): ") #storing the user input in the variable playAgain
+  if playAgain.lower() != "y" and playAgain.lower() != "n":# if the entered input does not match y/n, then the same function gets repeated
+    print("Can't recognise the response. Try again!") # error message
+    return playA()
+  else:
+    return playAgain
+
+def game(): # main function
+    playAgain = "y" # setting the initial value of playAgain variable as y
+    while playAgain.lower() == "y": # defining the game for when the user enter y as in to start the game
+        target = int(input("Enter target score: ")) # taking the input of the user for the length of the game
+        us = 0 # setting user score and computer score as 0
+        cs = 0
+        while(us<target and cs<target): # defining the game as long as neither scores have reached the target
+            user = input("Enter rock(r), paper(p) or scissors(s): ") # taking user's action
+            possible = ("r", "p", "s") # possible choice pool
+            com = random.choice(possible) # using random to choose from the cohice pool
+            if user.lower()=="r": # defining the well-known rules of the games
+                if com == "p":
+                    cs = cs+1
+                    print(f"Paper beats rock.\n Your score: {us}\n Computer score: {cs}")
+                elif com == "s":
+                    us = us+1
+                    print(f"Rock beats scissors.\n Your score: {us}\n Computer score: {cs}")
+                else:
+                    print("Both computer and user used rock. No points awarded.")
+            elif user.lower()=="p":
+                if com == "r":
+                    us = us+1
+                    print(f"Paper beats rock.\n Your score: {us}\n Computer score: {cs}")
+                elif com == "s":
+                    cs = cs+1
+                    print(f"Scissors beats rock.\n Your score: {us}\n Computer score: {cs}")
+                else:
+                    print("Both computer and user used paper. No points awarded.")
+            elif user.lower()=="s":
+                if com == "r":
+                    cs = cs+1
+                    print(f"Rock beats scissors.\n Your score: {us}\n Computer score: {cs}")
+                elif com == "p":
+                    us = us+1
+                    print(f"Scissors beats paper.\n Your score: {us}\n Computer score: {cs}")
+                else:
+                    print("Both computer and user used scissors. No points awarded.")
+            else: # in case the response is different from the possible ones, adding an error message
+                print("Sorry! Response not found")
+        else:
+            if us == target: # if the user wins
+                print(f"You won! User: {us}\n Computer : {cs}")
+            else: # if the computer wins
+                print(f"Oopsie! User: {us}\n Computer : {cs}")
+        playAgain = playA() # assigning the value of playAgain using the function playA()
+        
+game()        
